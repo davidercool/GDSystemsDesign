@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://sollyfls8gxt"]
+
+[ext_resource type="Script" path="res://button.gd" id="1_ibxva"]
+[ext_resource type="Script" path="res://rich_text_label.gd" id="1_nnkwu"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 349.0
+offset_top = 244.0
+offset_right = 516.0
+offset_bottom = 320.0
+text = "Click Me"
+script = ExtResource("1_ibxva")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 559.0
+offset_top = 274.0
+offset_right = 700.0
+offset_bottom = 303.0
+text = "Level: 1"
+script = ExtResource("1_nnkwu")
+
+[connection signal="button_down" from="Button" to="RichTextLabel" method="_on_button_button_down"]
