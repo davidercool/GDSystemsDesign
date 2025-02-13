@@ -2,6 +2,7 @@ extends Node2D
 
 #signals
 signal attack(dmg)
+signal spawn()
 
 #stats
 var playerHP = 20
