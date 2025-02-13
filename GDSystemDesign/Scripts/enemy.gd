@@ -3,8 +3,8 @@ extends Node2D
 signal dead(xp:int, gold:int)
 signal attack(enemyATK:int)
 
-var enemyHP
-var enemyDMG
+var enemyHP = 8
+var enemyDMG = 3
 var enemyXP = 5
 var enemyGP = 3
 var isDead = false
