@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://05xgpunnei3p"]
+[gd_scene load_steps=5 format=3 uid="uid://05xgpunnei3p"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_foxw6"]
 [ext_resource type="Texture2D" uid="uid://bu6wfwfw6mux7" path="res://Art/baddie.png" id="2_11f4b"]
+[ext_resource type="Texture2D" uid="uid://btunwribq3ih7" path="res://Art/Heart.png" id="3_663sj"]
+[ext_resource type="Texture2D" uid="uid://qfroy8uce34m" path="res://Art/Sword.png" id="4_3ttrr"]
 
 [node name="enemy" type="Node2D"]
 script = ExtResource("1_foxw6")
@@ -12,15 +14,27 @@ scale = Vector2(10, 10)
 texture = ExtResource("2_11f4b")
 
 [node name="Health" type="RichTextLabel" parent="."]
-offset_left = 15.0
-offset_top = -172.0
-offset_right = 64.0
-offset_bottom = -147.0
-text = "HP 8"
+offset_left = 39.0
+offset_top = -166.0
+offset_right = 88.0
+offset_bottom = -141.0
+text = "8"
 
 [node name="ATK" type="RichTextLabel" parent="."]
-offset_left = -94.0
-offset_top = -172.0
-offset_right = -45.0
-offset_bottom = -147.0
-text = "ATK 3"
+offset_left = -67.0
+offset_top = -165.0
+offset_right = -51.0
+offset_bottom = -140.0
+text = "3"
+
+[node name="Heart" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(24, -162)
+scale = Vector2(2, 2)
+texture = ExtResource("3_663sj")
+
+[node name="Sword" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-75, -159)
+scale = Vector2(2, 2)
+texture = ExtResource("4_3ttrr")

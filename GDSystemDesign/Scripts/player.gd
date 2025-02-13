@@ -9,6 +9,7 @@ var playerATK = 5
 var playerLVL = 1
 var playerXP = 0
 var playerGP = 5
+var targetXP = 5
 var enemyGP = 0
 var enemyXP = 0
 
@@ -37,10 +38,10 @@ func takeDamage(enemyATK):
 	playerHP -= enemyATK
 	
 func updateUI():
-	get_node("Damage").text = "DMG "+str(playerATK)
-	get_node("Health").text = "HP "+str(playerHP)
-	get_node("Gold").text = "Gold "+str(playerGP)
-	get_node("XP").text = "XP "+str(playerXP)
+	get_node("Damage").text = str(playerATK)
+	get_node("Health").text = str(playerHP)
+	get_node("Gold").text = str(playerGP)+" Gold"
+	get_node("XP").text = str(playerXP)+"/"+str(targetXP)
 	get_node("Level").text = "LVL "+str(playerLVL)
 	print("UI updated")
 
@@ -50,14 +51,11 @@ func loot():
 	inCombat = true
 	get_node("Button").text = "ATTACK"
 
-
 func _on_button_pressed():
 	resolveTurn()
 
-
 func _on_enemy_attack(enemyATK):
 	takeDamage(enemyATK)
-
 
 func _on_enemy_dead(XP, GP):
 	enemyXP = XP

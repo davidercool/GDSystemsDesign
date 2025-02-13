@@ -3,15 +3,15 @@ extends Node2D
 signal dead(xp:int, gold:int)
 signal attack(enemyATK:int)
 
-var enemyHP = 8
-var enemyDMG = 3
-var enemyXP = 7
-var enemyGP = 2
+var enemyHP
+var enemyDMG
+var enemyXP = 5
+var enemyGP = 3
 var isDead = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func spawn(hp, dmg):
+	enemyHP = hp
+	enemyDMG = dmg
 
 func _on_player_attack(playerATK):
 	print("ATTACK SIGNAL RECEIVED")
@@ -34,13 +34,12 @@ func attackPlayer(dmg):
 	attack.emit(dmg)
 
 func updateUI():
-	if isDead:
-		get_node("Health").text = "HP 0"
-	else:
-		get_node("Health").text = "HP "+str(enemyHP)
+	get_node("Health").text = str(enemyHP)
 	print("enemy UI updated")
 
 func die():
 	dead.emit(enemyXP, enemyGP)
 	print("enemy dead")
 	
+func respawn():
+	enemyHP = 10

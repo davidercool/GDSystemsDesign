@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://inadv7ule8vi"]
+[gd_scene load_steps=6 format=3 uid="uid://inadv7ule8vi"]
 
-[ext_resource type="Texture2D" uid="uid://ba3nd0m8bv2qk" path="res://Art/New Piskel-1.png.png" id="1_7ymnw"]
+[ext_resource type="Texture2D" uid="uid://ba3nd0m8bv2qk" path="res://Art/goodie.png" id="1_7ymnw"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_gfffs"]
 [ext_resource type="Script" path="res://Scripts/button.gd" id="3_8dp1p"]
+[ext_resource type="Texture2D" uid="uid://btunwribq3ih7" path="res://Art/Heart.png" id="4_4ikjb"]
+[ext_resource type="Texture2D" uid="uid://qfroy8uce34m" path="res://Art/Sword.png" id="5_sh4rh"]
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_gfffs")
@@ -13,31 +15,32 @@ scale = Vector2(10, 10)
 texture = ExtResource("1_7ymnw")
 
 [node name="Level" type="RichTextLabel" parent="."]
-offset_left = -95.0
-offset_top = 261.0
-offset_right = -43.0
-offset_bottom = 286.0
+offset_left = -40.0
+offset_top = 255.0
+offset_right = 12.0
+offset_bottom = 280.0
 text = "LVL 1"
 
 [node name="Health" type="RichTextLabel" parent="."]
-offset_left = -92.0
+offset_left = -62.0
 offset_top = -131.0
-offset_right = -40.0
+offset_right = -30.0
 offset_bottom = -106.0
-text = "HP: 10"
+text = "10"
 
 [node name="Damage" type="RichTextLabel" parent="."]
-offset_left = -18.0
+offset_left = 21.0
 offset_top = -131.0
-offset_right = 77.0
+offset_right = 45.0
 offset_bottom = -103.0
-text = "DMG: 5"
+text = "5"
 
 [node name="XP" type="RichTextLabel" parent="."]
-offset_top = 260.0
-offset_right = 57.0
-offset_bottom = 284.0
-text = "0/0 XP"
+offset_left = -37.0
+offset_top = 275.0
+offset_right = 12.0
+offset_bottom = 299.0
+text = "0/10"
 
 [node name="Gold" type="RichTextLabel" parent="."]
 offset_left = -52.0
@@ -54,5 +57,17 @@ offset_bottom = 255.0
 text = "ATTACK"
 script = ExtResource("3_8dp1p")
 metadata/_edit_use_anchors_ = true
+
+[node name="Heart" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-74, -127)
+scale = Vector2(2, 2)
+texture = ExtResource("4_4ikjb")
+
+[node name="Sword" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9, -124)
+scale = Vector2(2, 2)
+texture = ExtResource("5_sh4rh")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

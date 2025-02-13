@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://sollyfls8gxt"]
+[gd_scene load_steps=4 format=3 uid="uid://sollyfls8gxt"]
 
+[ext_resource type="Script" path="res://Scenes/gameManager.gd" id="1_istdp"]
 [ext_resource type="PackedScene" uid="uid://05xgpunnei3p" path="res://Scenes/enemy.tscn" id="2_oevpj"]
 [ext_resource type="PackedScene" uid="uid://inadv7ule8vi" path="res://Scenes/player.tscn" id="3_wfj5j"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_istdp")
 
 [node name="Player" parent="." instance=ExtResource("3_wfj5j")]
 texture_filter = 1
