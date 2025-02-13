@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://sollyfls8gxt"]
+
+[ext_resource type="PackedScene" uid="uid://05xgpunnei3p" path="res://Scenes/enemy.tscn" id="2_oevpj"]
+[ext_resource type="PackedScene" uid="uid://inadv7ule8vi" path="res://Scenes/player.tscn" id="3_wfj5j"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("3_wfj5j")]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(327, 253)
+
+[node name="enemy" parent="." instance=ExtResource("2_oevpj")]
+position = Vector2(839, 293)
+
+[connection signal="attack" from="Player" to="enemy" method="_on_player_attack"]
+[connection signal="attack" from="enemy" to="Player" method="_on_enemy_attack"]
+[connection signal="dead" from="enemy" to="Player" method="_on_enemy_dead"]
