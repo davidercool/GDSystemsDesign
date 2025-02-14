@@ -1,65 +1,46 @@
 extends Node2D
 
-#signals
-signal attack(dmg)
-signal spawn()
+signal died
+signal lvlup
 
 #stats
-var playerHP = 20
-var playerATK = 5
-var playerLVL = 1
-var playerXP = 0
-var playerGP = 5
+var maxHP = 20
+var HP = 20
+var ATK = 5
+var LVL = 1
+var XP = 0
+var GP = 5
 var targetXP = 5
-var enemyGP = 0
-var enemyXP = 0
 
-#state machine
-var inCombat = true
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	updateUI()
 
-func resolveTurn():
-	if inCombat:
-		dealDamage()
-		updateUI()
-	else:
-		print("LOOTING")
-		loot()
-		updateUI()
+func attacked(dmg):
+	HP -= dmg
+	if HP <= 0:
+		died.emit()
+	updateUI()
 
-func dealDamage():
-	attack.emit(playerATK)
-	print("ATTACK SIGNAL EMITTED")
+func loot(xp, gold):
+	XP += xp
+	GP += gold
+	if XP >= targetXP:
+		levelup()
+	updateUI()
 
-func takeDamage(enemyATK):
-	print("player hurt")
-	playerHP -= enemyATK
-	
+func levelup():
+	print("LEVEL UP")
+	LVL += 1
+	XP -= targetXP
+	targetXP += ceil(targetXP*0.21)
+	maxHP += floor(maxHP*0.2)
+	HP = maxHP
+	ATK += floor(ATK*0.1)
+	lvlup.emit()
+
 func updateUI():
-	get_node("Damage").text = str(playerATK)
-	get_node("Health").text = str(playerHP)
-	get_node("Gold").text = str(playerGP)+" Gold"
-	get_node("XP").text = str(playerXP)+"/"+str(targetXP)
-	get_node("Level").text = "LVL "+str(playerLVL)
-	print("UI updated")
-
-func loot():
-	playerGP += enemyGP
-	playerXP += enemyXP
-	inCombat = true
-	get_node("Button").text = "ATTACK"
-
-func _on_button_pressed():
-	resolveTurn()
-
-func _on_enemy_attack(enemyATK):
-	takeDamage(enemyATK)
-
-func _on_enemy_dead(XP, GP):
-	enemyXP = XP
-	enemyGP = GP
-	inCombat = false
-	get_node("Button").text = "LOOT"
+	get_node("Health").text = str(HP)
+	get_node("Damage").text = str(ATK)
+	get_node("Level").text = "LVL "+str(LVL)
+	get_node("XP").text = str(XP)+"/"+str(targetXP)
+	get_node("Gold").text = str(GP)+" Gold"

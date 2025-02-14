@@ -1,45 +1,31 @@
 extends Node2D
 
-signal dead(xp:int, gold:int)
-signal attack(enemyATK:int)
+signal died
 
-var enemyHP = 8
-var enemyDMG = 3
-var enemyXP = 5
-var enemyGP = 3
-var isDead = false
+var maxHP = 8
+var HP = 8
+var ATK = 3
+var XP = 3
+var GP = 2
+var scaling = 0.15
 
-func spawn(hp, dmg):
-	enemyHP = hp
-	enemyDMG = dmg
-
-func _on_player_attack(playerATK):
-	print("ATTACK SIGNAL RECEIVED")
-	resolveTurn(playerATK)
-
-func resolveTurn(playerATK):
-	takeDamage(playerATK)
-	attackPlayer(enemyDMG)
+func respawn():
+	HP = maxHP
 	updateUI()
 
-func takeDamage(playerATK):
-	enemyHP -= playerATK
-	print("enemy hurt")
-	if enemyHP <= 0:
-		isDead = true
-		die()
-	
+func playerLVLUP():
+	maxHP += ceil(maxHP*scaling)
+	ATK += ceil(ATK*scaling)
+	XP += ceil(XP*scaling)
+	GP += ceil(GP*scaling)
+	updateUI()
 
-func attackPlayer(dmg):
-	attack.emit(dmg)
+func attacked(dmg):
+	HP -= dmg
+	if HP <= 0:
+		died.emit()
+	updateUI()
 
 func updateUI():
-	get_node("Health").text = str(enemyHP)
-	print("enemy UI updated")
-
-func die():
-	dead.emit(enemyXP, enemyGP)
-	print("enemy dead")
-	
-func respawn():
-	enemyHP = 10
+	get_node("Health").text = str(HP)
+	get_node("ATK").text = str(ATK)
